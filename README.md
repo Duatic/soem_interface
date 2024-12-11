@@ -1,5 +1,7 @@
 # SOEM Interface
 
+__NOTE:__ This is a fork of the original [package](https://github.com/leggedrobotics/soem_interface) maintained by [Duatic](https://duatic.com).
+
 ## Overview
 This software package serves as a C++ interface for one or more EtherCAT devices running on the same bus.
 The lower level EtherCAT communication is handled by the [SOEM](https://github.com/OpenEtherCATsociety/soem) library.
@@ -21,29 +23,13 @@ A copy of the license is available in the *COPYING* file.
 ## Installation
 
 ### Dependencies
-#### Catkin Packages
+
 
 | Repo           | url                                                  | license      | content            |
 |:--------------:|:----------------------------------------------------:|:------------:|:------------------:|
 | message_logger | https://github.com/leggedrobotics/message_logger.git | BSD 3-Clause | simple log streams |
 
-#### System Dependencies (Ubuntu 18.04 LTS)
-- [ROS Melodic](https://wiki.ros.org/melodic) (full installation)
-- [catkin](https://wiki.ros.org/catkin)
 
-### Building from Source
-
-To build the library from source, clone the latest version from this repository into your catkin workspace and compile the package using
-
-	cd catkin_workspace/src
-	git clone https://github.com/leggedrobotics/message_logger.git
-	git clone https://github.com/leggedrobotics/soem_interface.git
-	cd ../
-	catkin build soem_interface
-
-To build the examples, execute the following command inside of your catkin workspace:
-	
-	catkin build soem_interface_examples
 	
 ## Classes
 
@@ -59,9 +45,3 @@ EthercatSlaves can be added with addSlave(). After all the slaves have been adde
 
 #### EthercatBusManagerBase
 If multiple buses are connected to the same master then the buses are managed by the EthercatBusManagerBase.
-
-## Note
-Due to the current pandemic we could not test this version of the soem_interface.
-
-Tests will be conducted as soon as possible.
-
