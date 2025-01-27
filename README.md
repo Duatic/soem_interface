@@ -27,7 +27,7 @@ A copy of the license is available in the *COPYING* file.
 
 | Repo           | url                                                  | license      | content            |
 |:--------------:|:----------------------------------------------------:|:------------:|:------------------:|
-| message_logger | https://github.com/leggedrobotics/message_logger.git | BSD 3-Clause | simple log streams |
+| message_logger | https://github.com/ANYbotics/message_logger          | BSD 3-Clause | simple log streams |
 
 
 	
