@@ -28,11 +28,11 @@ add_definitions(-DMELO_USE_COUT)
 set(PACKAGE_DEPENDENCIES
   ament_cmake
   message_logger
-  soem_rsl
+  soem_vendor
 )
 
 find_package(ament_cmake REQUIRED)
-find_package(soem_rsl REQUIRED)
+find_package(soem_vendor REQUIRED)
 find_package(message_logger REQUIRED)
 
 

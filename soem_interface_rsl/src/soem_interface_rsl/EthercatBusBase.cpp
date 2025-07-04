@@ -1,7 +1,7 @@
 /*
 ** Copyright (2019-2020) Robotics Systems Lab - ETH Zurich:
 ** Markus Staeuble, Jonas Junger, Johannes Pankert, Philipp Leemann,
-** Tom Lankhorst, Samuel Bachmann, Gabriel Hottiger, Lennert Nachtigall,
+** Tom Lankhorst, Samuel Bachmann, Gabriel Hottiger, Lennart Nachtigall,
 ** Mario Mauerer, Remo Diethelm
 **
 ** This file is part of the soem_interface_rsl.
@@ -23,7 +23,10 @@
 #include <soem_interface_rsl/EthercatBusBase.hpp>
 #include <soem_interface_rsl/EthercatSlaveBase.hpp>
 
-#include <soem_rsl/ethercat.h>
+#include <soem_vendor/ethercat.h>
+
+// Forward declaration as newer versions of SOEM does not include it inthe header anymore
+int ecx_detect_slaves(ecx_contextt *context);
 
 namespace soem_interface_rsl {
 
@@ -829,6 +832,8 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
                                &ecatEList_,
                                &ecatIdxStack_,
                                &ecatError_,
+                               0,
+                               0,
                                &ecatDcTime_,
                                &ecatSmCommtype_[0],
                                &ecatPdoAssign_[0],
