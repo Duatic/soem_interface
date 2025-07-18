@@ -39,7 +39,7 @@ along with the soem_interface_rsl.  If not, see <https://www.gnu.org/licenses/>.
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <depend>message_logger</depend>
-  <depend>soem_rsl</depend>
+  <depend>soem_vendor</depend>
   <export>
     <build_type>ament_cmake</build_type>
   </export>
