@@ -26,7 +26,7 @@
 #include <soem_vendor/ethercat.h>
 
 // Forward declaration as newer versions of SOEM does not include it inthe header anymore
-int ecx_detect_slaves(ecx_contextt *context);
+extern "C" int ecx_detect_slaves(ecx_contextt *context);
 
 namespace soem_interface_rsl {
 
