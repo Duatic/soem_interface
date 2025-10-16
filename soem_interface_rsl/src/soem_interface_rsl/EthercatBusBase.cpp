@@ -132,15 +132,15 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
           break;
         }
         if (retry == maxDiscoverRetries) {
-          MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] "
-                                                    << "No slaves have been found.");
+          MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] EtherCAT discovery failed: " << detected_slaves << " slave(s) detected (expected >= 1) ");
           ecx_close(&ecatContext_);
           return false;
         }
         // Sleep and retry.
         soem_interface_rsl::threadSleep(ecatConfigRetrySleep_);
-        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] No slaves have been found, retrying " << retry + 1 << "/"
-                                                 << maxDiscoverRetries << " ...");
+        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Detected " << detected_slaves
+                   << " slaves, expected >= " << expected_slaves << ". Retrying ("
+                   << (retry + 1) << "/" << maxDiscoverRetries << ")...");
       }
 
       // this should now work cleanly, since we're sure that all slaves are started.
@@ -150,7 +150,9 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       if (detected_config < expected_slaves) {
         ecx_close(&ecatContext_);
         MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] "
-                                                  << "No slaves have been found.");
+              << "EtherCAT configuration failed: detected " << detected_config << " device(s), expected >= " << expected_slaves << " device(s).");
+        
+        EthercatBusBase::printAvailableBusses();
         return false;
       }
 
