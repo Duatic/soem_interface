@@ -290,7 +290,9 @@ namespace soem_interface_rsl
 
       for (const auto &slave : slaves_) {
           setStateLocked(EC_STATE_OPERATIONAL, slave->getAddress());
-          waitForStateLocked(EC_STATE_OPERATIONAL, slave->getAddress());
+          if(!waitForStateLocked(EC_STATE_OPERATIONAL, slave->getAddress())) {
+            MELO_ERROR_STREAM(slave->getName() << " " << slave->getAddress() << "Did not reach: EC_STATE_OPERATIONAL");
+          }
         }
 
       workingCounterTooLowCounter_ = 0;
