@@ -211,6 +211,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
     std::lock_guard<std::mutex> contextLock(contextMutex_);
     // Set up the communication IO mapping.
     // Note: ecx_config_map_group(..) requests the slaves to go to SAFE-OP.
+    
     [[maybe_unused]] int ioMapSize = ecx_config_map_group(&ecatContext_, &ioMap_, 0);
     MELO_DEBUG_STREAM("[soem_interface_rsl::" << name_ << "] Configured ioMap with size: " << ioMapSize)
 
@@ -792,7 +793,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
   size_t busDiagOfCurrentSlave_{0};  // running variable to send only one frame per slave.
 
   // EtherCAT input/output mapping of the slaves within the datagrams.
-  char ioMap_[4096];
+  char ioMap_[4096*2];
 
   // EtherCAT context data elements:
 
