@@ -214,7 +214,10 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
     
     [[maybe_unused]] int ioMapSize = ecx_config_map_group(&ecatContext_, &ioMap_, 0);
     MELO_DEBUG_STREAM("[soem_interface_rsl::" << name_ << "] Configured ioMap with size: " << ioMapSize)
-
+    if(sizeof(ioMap_) < (std::size_t)(ioMapSize)){
+      MELO_ERROR_STREAM("ioMap_ buffer size is smaller than needed: " << sizeof(ioMap_) << " vs " << ioMapSize );
+      return false;
+    }
     // Check if the size of the IO mapping fits our slaves.
     bool ioMapIsOk = true;
     // do this check only if 'sizeCheck' is true
