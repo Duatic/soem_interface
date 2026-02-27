@@ -288,6 +288,8 @@ namespace soem_interface_rsl
         return false;
       }
 
+      ecx_configdc(&ecatContext_);
+
       // Initialize the memory with zeroes.
       for (int slave = 1; slave <= *ecatContext_.slavecount; slave++)
       {
