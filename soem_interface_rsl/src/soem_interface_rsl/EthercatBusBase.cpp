@@ -280,23 +280,7 @@ namespace soem_interface_rsl
       {
         return false;
       }
-
-      MELO_INFO_STREAM("Config dc");
-      ecx_configdc(&ecatContext_);
-      for (int i = 1; i <= ec_slavecount; i++)
-      {
-        if (ec_slave[i].hasdc)
-        {
-          printf("Configuring DC Sync0 for slave %d\n", i);
-
-          ec_dcsync0(i,             // slave number
-                     TRUE,          // enable Sync0
-                     1000000, // cycle time
-                     0);            // shift time
-        }
-      }
-      osal_usleep(200000); // 200 ms
-
+      
       // Initialize the memory with zeroes.
       for (int slave = 1; slave <= *ecatContext_.slavecount; slave++)
       {
@@ -304,8 +288,13 @@ namespace soem_interface_rsl
         memset(ecatContext_.slavelist[slave].outputs, 0, ecatContext_.slavelist[slave].Obytes);
       }
 
-      workingCounterTooLowCounter_ = 0;
+      for (const auto &slave : slaves_) {
+          setStateLocked(EC_STATE_OPERATIONAL, slave->getAddress());
+          waitForStateLocked(EC_STATE_OPERATIONAL, slave->getAddress());
+        }
 
+      workingCounterTooLowCounter_ = 0;
+        
       return true;
     }
 
