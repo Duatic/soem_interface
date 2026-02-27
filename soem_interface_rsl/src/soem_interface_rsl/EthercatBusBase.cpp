@@ -246,6 +246,9 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       return false;
     }
 
+    MELO_INFO_STREAM("Config dc");
+    ecx_configdc(&ecatContext_);
+
     // Initialize the memory with zeroes.
     for (int slave = 1; slave <= *ecatContext_.slavecount; slave++) {
       memset(ecatContext_.slavelist[slave].inputs, 0, ecatContext_.slavelist[slave].Ibytes);
