@@ -1,5 +1,10 @@
 # SOEM Interface
 
+[![Rolling Build Main](https://github.com/Duatic/soem_interface/actions/workflows/build-rolling.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-rolling.yml)
+[![Kilted Build Main](https://github.com/Duatic/soem_interface/actions/workflows/build-kilted.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-kilted.yml)
+[![Jazzy Build Main](https://github.com/Duatic/soem_interface/actions/workflows/build-jazzy.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-jazzy.yml)
+[![Humble Build Main](https://github.com/Duatic/soem_interface/actions/workflows/build-humble.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-humble.yml)
+
 __NOTE:__ This is a fork of the original [package](https://github.com/leggedrobotics/soem_interface) maintained by [Duatic](https://duatic.com).
 
 ## Overview
