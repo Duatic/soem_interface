@@ -59,9 +59,19 @@ target_include_directories(${PROJECT_NAME}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
 
-ament_target_dependencies(
-    ${PROJECT_NAME} ${PACKAGE_DEPENDENCIES}
-)
+
+# Check if ament_target_dependencies exists
+if(COMMAND ament_target_dependencies)
+  # Use the old ROS 2 macro if available
+  ament_target_dependencies(${PROJECT_NAME}
+    ${PACKAGE_DEPENDENCIES}
+  )
+else()
+  # Fallback for Rolling or newer distros
+  target_link_libraries(${PROJECT_NAME}
+    ${PACKAGE_DEPENDENCIES}
+  )
+endif()
 
 ament_export_libraries(${PROJECT_NAME})
 ament_export_dependencies(${PACKAGE_DEPENDENCIES})
