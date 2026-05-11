@@ -796,7 +796,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
   size_t busDiagOfCurrentSlave_{0};  // running variable to send only one frame per slave.
 
   // EtherCAT input/output mapping of the slaves within the datagrams.
-  char ioMap_[4096*2];
+  char ioMap_[4096*4];
 
   // EtherCAT context data elements:
 
