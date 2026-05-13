@@ -640,7 +640,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       MELO_DEBUG_STREAM("[soem_interface_rsl::" << name_ << "] All slaves on State " << EthercatBusBase::getStateString(state)
                                                 << " has been set.");
     } else {
-      MELO_DEBUG_STREAM("[soem_interface_rsl::" << name_ << "] Slave " << slaves_[slave - 1]->getName() << " State "
+      MELO_DEBUG_STREAM("[soem_interface_rsl::" << name_ << "] Slave " << slave << " State "
                                                 << EthercatBusBase::getStateString(state) << " has been set.");
     }
   }
