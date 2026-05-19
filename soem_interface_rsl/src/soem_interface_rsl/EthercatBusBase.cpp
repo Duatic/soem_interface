@@ -32,12 +32,15 @@ namespace soem_interface_rsl {
 
 static bool busIsAvailable(const std::string& name) {
   ec_adaptert* adapter = ec_find_adapters();
+  auto initial_adapter_ptr = adapter;
   while (adapter != nullptr) {
     if (name == std::string(adapter->name)) {
+      ec_free_adapters(initial_adapter_ptr);
       return true;
     }
     adapter = adapter->next;
   }
+  ec_free_adapters(initial_adapter_ptr);
   return false;
 }
 
