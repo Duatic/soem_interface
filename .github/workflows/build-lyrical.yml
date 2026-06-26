@@ -12,7 +12,7 @@ on:
     - cron: '13 4 * * *'
 
 jobs:
-  kilted_binary_master:
+  lyrical_binary_master:
     uses: ./.github/workflows/reusable_ici.yml
     with:
       ros_distro: lyrical
@@ -20,3 +20,4 @@ jobs:
       upstream_workspace: 'repos.list'
       ref_for_scheduled_build: master
       before_install_upstream_dependencies: 'sudo apt install -y libboost-regex-dev'
+      image: 'ubuntu-26.04'
