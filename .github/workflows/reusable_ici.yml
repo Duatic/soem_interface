@@ -33,11 +33,16 @@ on:
         default: '.ccache'
         required: false
         type: string
+      image:
+        description: "Image to run the workflow on"
+        default: 'ubuntu-24.04'
+        required: false
+        type: string
 
 jobs:
   reusable_ici:
     name: ${{ inputs.ros_distro }} ${{ inputs.ros_repo }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.image }}
     env:
       CCACHE_DIR: ${{ github.workspace }}/${{ inputs.ccache_dir }}
       CACHE_PREFIX: ${{ inputs.ros_distro }}-${{ inputs.upstream_workspace }}-${{ inputs.ros_repo }}-${{ github.job }}
