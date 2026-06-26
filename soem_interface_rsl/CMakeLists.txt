@@ -25,12 +25,6 @@ add_definitions(-std=c++17 -Wall -Werror)
 add_definitions(-DMELO_USE_COUT)
 
 
-set(PACKAGE_DEPENDENCIES
-  ament_cmake
-  message_logger
-  soem_vendor
-)
-
 find_package(ament_cmake REQUIRED)
 find_package(soem_vendor REQUIRED)
 find_package(message_logger REQUIRED)
@@ -46,6 +40,7 @@ add_library(
   src/${PROJECT_NAME}/EthercatBusManagerBase.cpp
   src/${PROJECT_NAME}/EthercatBusBase.cpp
 )
+add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 
 # https://stackoverflow.com/questions/2222162/how-to-apply-fvisibility-option-to-symbols-in-static-libraries
@@ -59,12 +54,17 @@ target_include_directories(${PROJECT_NAME}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
 
-ament_target_dependencies(
-    ${PROJECT_NAME} ${PACKAGE_DEPENDENCIES}
-)
+# Support ros distros older than lyrical
+if(COMMAND ament_target_dependencies)
+    ament_target_dependencies(${PROJECT_NAME} message_logger soem_vendor)
+else()
+    target_link_libraries(${PROJECT_NAME}
+    message_logger::message_logger
+    soem_vendor::soem_vendor)
+endif()
 
 ament_export_libraries(${PROJECT_NAME})
-ament_export_dependencies(${PACKAGE_DEPENDENCIES})
+ament_export_dependencies(soem_vendor message_logger)
 ament_export_include_directories(include)
 
 
