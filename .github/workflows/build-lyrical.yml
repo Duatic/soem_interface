@@ -1,22 +1,22 @@
-name: Lyrical Build Main
+name: Lyrical Build master
 on:
   workflow_dispatch:
   pull_request:
     branches:
-      - main
+      - master
   push:
     branches:
-      - main
+      - master
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '13 4 * * *'
 
 jobs:
-  kilted_binary_main:
+  kilted_binary_master:
     uses: ./.github/workflows/reusable_ici.yml
     with:
       ros_distro: lyrical
-      ros_repo: main
+      ros_repo: master
       upstream_workspace: 'repos.list'
-      ref_for_scheduled_build: main
+      ref_for_scheduled_build: master
       before_install_upstream_dependencies: 'sudo apt install -y libboost-regex-dev'
