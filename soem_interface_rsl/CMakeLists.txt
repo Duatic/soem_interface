@@ -18,10 +18,10 @@
 # You should have received a copy of the GNU General Public License
 # along with the soem_interface_rsl.  If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.22)
 project(soem_interface_rsl)
 
-add_definitions(-std=c++17 -Wall -Werror)
+add_definitions(-std=c++17 -Wall -Wextra)
 add_definitions(-DMELO_USE_COUT)
 
 
