@@ -66,7 +66,7 @@ endif()
 ament_export_libraries(${PROJECT_NAME})
 ament_export_dependencies(soem_vendor message_logger)
 ament_export_include_directories(include)
-
+ament_export_targets(export_${PROJECT_NAME})
 
 #hide all symboles except the explicitly marked ones.
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_VISIBILITY_PRESET hidden)
@@ -79,11 +79,10 @@ install(
 
 install(
     TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}Target
+    EXPORT export_${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
 )
 
 ament_package()
