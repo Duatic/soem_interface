@@ -199,10 +199,10 @@ class SOEM_RSL_EXPORT EthercatBusBase : private EthercatBusBaseTemplateAdapter {
   soem_interface_rsl::ETHERCAT_SM_STATE getEthercatState(const uint16_t slave = 0);
 
   /*!
-   * Checks if all slaves are in EC_STATE_OPERATIONAL, therefore reads EC state from all slaves!
+   * Checks if all registered slaves are in EC_STATE_OPERATIONAL, therefore reads EC state from all slaves!
    * If not does some basic printing for potential debugging.
    * @param logErrorCounterForDiagnosis runs some error counter diagnosis, which are available to log in getBusDiagnosis.
-   * @return true if all fine = all slaves in EC_STATE_OP
+   * @return true if all fine = all registered slaves in EC_STATE_OP
    */
   bool doBusMonitoring(bool logErrorCounterForDiagnosis = false);
 
