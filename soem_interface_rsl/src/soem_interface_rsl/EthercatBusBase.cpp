@@ -401,35 +401,34 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       // read all the states from all slaves.
       MELO_DEBUG_STREAM("[DriveManager::DoBusMonitoring::" << name_ << "] Running Bus Monitoring/Diagnosis State/AlstatusCode")
 
-      int lowestSlaveState = getState(0);  // one datagram iff all slaves in the same state, otherwise one datagram per slave.
+      // Refresh slavelist[..].state and .ALstatuscode for every device on the bus
+      getState(0);
 
       // can we do more than looking on the state machine? error counters would be interessting but needs very raw register reads, but
       // possible.
       std::lock_guard<std::mutex> guard(contextMutex_);
-      if ((lowestSlaveState & 0x0f) < EC_STATE_OPERATIONAL) {  // if ECAT Error bus state is e.g. 0x14 = 0x10 (error) + 0x04 (safeOP)
-        MELO_WARN_STREAM("[EthercatBus::BusMonitoring::" << name_ << "] No all slaves in EC_STATE_OPERATIONAL")
-        for (const auto& slave : slaves_) {
-          MELO_WARN_STREAM("[EthercatBus::BusMonitoring::"
-                           << name_ << "] Slave: " << slave->getName()
-                           << " in state: " << EthercatBusBase::getStateString(ecatContext_.slavelist[slave->getAddress()].state))
-
-          if ((ecatContext_.slavelist[slave->getAddress()].state & 0x0f) < EC_STATE_OPERATIONAL) {
-            MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slave->getName() << " alStatusCode: 0x" << std::setfill('0')
-                                                     << std::setw(8) << std::hex << ecatContext_.slavelist[slave->getAddress()].ALstatuscode
-                                                     << " "
-                                                     << ec_ALstatuscode2string(ecatContext_.slavelist[slave->getAddress()].ALstatuscode));
-
-            if (ecatContext_.slavelist[slave->getAddress()].state == EC_STATE_NONE && !ecatContext_.slavelist[slave->getAddress()].islost) {
-              ecatContext_.slavelist[slave->getAddress()].islost = TRUE;
-              MELO_ERROR_STREAM("[EthercatBus::BusMonitoring] Slave: "
-                                << slave->getName() << " no valid state read - slave probably lost - check your cables ;-) !")
-              // todo  Trying to recover the lost slave. !NOT IMPLEMENTED! example: in soem_rsl simple_test.c
-              // slave (sdks) would require an optional virtual method, something like: slave->recover() in case they loose connection.
-              // (could fix partially shacky cables in software..)
-            }
-          }
+      for (const auto& slave : slaves_) {
+        const uint16_t slaveState = ecatContext_.slavelist[slave->getAddress()].state;
+        if ((slaveState & 0x0f) >= EC_STATE_OPERATIONAL) {
+          continue;
         }
         allFine = false;
+        MELO_WARN_STREAM("[EthercatBus::BusMonitoring::" << name_ << "] Slave: " << slave->getName()
+                                                         << " not in EC_STATE_OPERATIONAL, state: "
+                                                         << EthercatBusBase::getStateString(slaveState))
+        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slave->getName() << " alStatusCode: 0x" << std::setfill('0')
+                                                 << std::setw(8) << std::hex << ecatContext_.slavelist[slave->getAddress()].ALstatuscode
+                                                 << " "
+                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave->getAddress()].ALstatuscode));
+
+        if (slaveState == EC_STATE_NONE && !ecatContext_.slavelist[slave->getAddress()].islost) {
+          ecatContext_.slavelist[slave->getAddress()].islost = TRUE;
+          MELO_ERROR_STREAM("[EthercatBus::BusMonitoring] Slave: " << slave->getName()
+                                                                   << " no valid state read - slave probably lost - check your cables ;-) !")
+          // todo  Trying to recover the lost slave. !NOT IMPLEMENTED! example: in soem_rsl simple_test.c
+          // slave (sdks) would require an optional virtual method, something like: slave->recover() in case they loose connection.
+          // (could fix partially shacky cables in software..)
+        }
       }
     }
 
