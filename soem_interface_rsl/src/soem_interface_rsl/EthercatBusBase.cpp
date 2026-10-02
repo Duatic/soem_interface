@@ -529,8 +529,8 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       } else {
         MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaves_[slave - 1]->getName() << " alStatusCode: 0x"
                                                  << std::setfill('0') << std::setw(8) << std::hex
-                                                 << ecatContext_.slavelist[slave].ALstatuscode << " "
-                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
+                                                 << ecatContext_.slavelist[slave-1].ALstatuscode << " "
+                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave-1].ALstatuscode));
       }
       return false;
     }
@@ -558,8 +558,8 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       } else {
         MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaves_[slave - 1]->getName() << " alStatusCode: 0x"
                                                  << std::setfill('0') << std::setw(8) << std::hex
-                                                 << ecatContext_.slavelist[slave].ALstatuscode << " "
-                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
+                                                 << ecatContext_.slavelist[slave-1].ALstatuscode << " "
+                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave-1].ALstatuscode));
       }
       return false;
     }
