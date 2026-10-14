@@ -25,7 +25,7 @@
 
 #include <soem_vendor/ethercat.h>
 #include <algorithm>
-// Forward declaration as newer versions of SOEM does not include it inthe header anymore
+// Forward declaration as newer versions of SOEM does not include it in the header anymore
 extern "C" int ecx_detect_slaves(ecx_contextt *context);
 
 namespace soem_interface_rsl {
@@ -86,7 +86,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
     }
 
     slaves_.push_back(slave);
-    // ensure that they are sorted in adress order. this makes access simpler (access via slaveaddress -1)
+    // ensure that they are sorted in address order. this makes access simpler (access via slaveaddress -1)
     std::sort(slaves_.begin(), slaves_.end(),
               [](const EthercatSlaveBasePtr& a, const EthercatSlaveBasePtr& b) -> bool { return a->getAddress() < b->getAddress(); });
     return true;
@@ -120,9 +120,9 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
           MELO_WARN_STREAM("[soem_interface_rsl::" << name_ << "] "
                                                    << "Shutdown during waiting for slaves.");
           ecx_close(&ecatContext_);
-          return false;  // avoid that executation continues.
+          return false;  // avoid that execution continues.
         }
-        
+
         // SWITCH TOPOLOGY FIX: Use >= comparison to support switch topologies
         // where infrastructure devices (switches) are included in the total device count
         int detected_slaves = ecx_detect_slaves(&ecatContext_);
@@ -154,7 +154,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
         ecx_close(&ecatContext_);
         MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] "
               << "EtherCAT configuration failed: detected " << detected_config << " device(s), expected >= " << expected_slaves << " device(s).");
-        
+
         EthercatBusBase::printAvailableBusses();
         return false;
       }
@@ -214,7 +214,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
     std::lock_guard<std::mutex> contextLock(contextMutex_);
     // Set up the communication IO mapping.
     // Note: ecx_config_map_group(..) requests the slaves to go to SAFE-OP.
-    
+
     [[maybe_unused]] int ioMapSize = ecx_config_map_group(&ecatContext_, &ioMap_, 0);
     MELO_DEBUG_STREAM("[soem_interface_rsl::" << name_ << "] Configured ioMap with size: " << ioMapSize)
     if(sizeof(ioMap_) < (std::size_t)(ioMapSize)){
@@ -404,7 +404,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       // Refresh slavelist[..].state and .ALstatuscode for every device on the bus
       getState(0);
 
-      // can we do more than looking on the state machine? error counters would be interessting but needs very raw register reads, but
+      // can we do more than looking on the state machine? error counters would be interesting but needs very raw register reads, but
       // possible.
       std::lock_guard<std::mutex> guard(contextMutex_);
       for (const auto& slave : slaves_) {
@@ -440,7 +440,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       auto& selectedSlave = slaves_[busDiagOfCurrentSlave_];
       // Reading from registers: e.g. ECT_REG_RXERR, addr_0x0300 - 0x0307 (check Ethercat Specification ETG1000.4 for details)
       // one frame per slave.( BRD call would OR together the error counters, therefore for exact number one frame per slave required.)
-      // we therefore continously update our saved values by mixing in a single datagram per call to this function and sweeping over the
+      // we therefore continuously update our saved values by mixing in a single datagram per call to this function and sweeping over the
       // slaves.
       std::byte rawData[REG::ERROR_COUNTERS_LIST.memorySize()];
       memset(rawData, 0xbe, REG::ERROR_COUNTERS_LIST.memorySize());

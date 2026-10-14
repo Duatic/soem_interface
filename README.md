@@ -36,17 +36,17 @@ A copy of the license is available in the *COPYING* file.
 | message_logger | https://github.com/leggedrobotics/message_logger.git | BSD 3-Clause | simple log streams |
 
 
-	
+
 ## Classes
 
 #### EthercatSlaveBase
-This is an abstract base class for an ethercat slave. The ethercat slave class holds a non owning reference to the EthercatBusBase it is on (bus_). 
+This is an abstract base class for an ethercat slave. The ethercat slave class holds a non owning reference to the EthercatBusBase it is on (bus_).
 EthercatSlaves should stage their tx messages before writing to the ethercat bus in the updateWrite() method using the bus_ writeRxPdo() method.
 Similarly, the slaves can retrieve the buffered read messages from the bus with the readTxPdo() method in updateRead().
 
 #### EthercatBusBase
-This class represents a physical ethercat bus containing multiple ethercat slaves. 
-It manages the slaves on the bus using the methods from soem.  With updateRead() and updatewrite() the staged slave messages are written/read to/from all the slaves on the bus simultaneously. 
+This class represents a physical ethercat bus containing multiple ethercat slaves.
+It manages the slaves on the bus using the methods from soem.  With updateRead() and updatewrite() the staged slave messages are written/read to/from all the slaves on the bus simultaneously.
 EthercatSlaves can be added with addSlave(). After all the slaves have been added the startup() method to actually start the communication of the bus.
 
 #### EthercatBusManagerBase

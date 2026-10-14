@@ -68,7 +68,7 @@ ament_export_dependencies(soem_vendor message_logger)
 ament_export_include_directories(include)
 ament_export_targets(export_${PROJECT_NAME})
 
-#hide all symboles except the explicitly marked ones.
+#hide all symbols except the explicitly marked ones.
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_VISIBILITY_PRESET hidden)
 set_target_properties(${PROJECT_NAME} PROPERTIES C_VISIBILITY_PRESET hidden)
 
