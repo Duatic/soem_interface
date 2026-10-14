@@ -129,8 +129,8 @@ class SOEM_RSL_EXPORT EthercatBusBase : private EthercatBusBaseTemplateAdapter {
    * Startup the bus communication.
    * @param abortFlag  during startup it is waited till all the slaves are ready this can take some time, the abortFlag can be set to abort
    * this operation.
-   * @param sizeCheck	perform a check of the Rx and Tx Pdo sizes defined in the PdoInfo object of the slaves
-   * @param maxDiscoverRetries	number of retries till the configured number of slaves are found on the bus.
+   * @param sizeCheck perform a check of the Rx and Tx Pdo sizes defined in the PdoInfo object of the slaves
+   * @param maxDiscoverRetries  number of retries till the configured number of slaves are found on the bus.
    * @return True if successful.
    */
   bool startup(bool sizeCheck, int maxDiscoverRetries = 10);
