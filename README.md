@@ -1,10 +1,10 @@
 # SOEM Interface
 
-[![Humble](https://github.com/Duatic/soem_interface/actions/workflows/build-humble.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-humble.yml)
-[![Jazzy](https://github.com/Duatic/soem_interface/actions/workflows/build-jazzy.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-jazzy.yml)
-[![Kilted](https://github.com/Duatic/soem_interface/actions/workflows/build-kilted.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-kilted.yml)
-[![Lyrical](https://github.com/Duatic/soem_interface/actions/workflows/build-lyrical.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-lyrical.yml)
-[![Rolling](https://github.com/Duatic/soem_interface/actions/workflows/build-rolling.yml/badge.svg)](https://github.com/Duatic/soem_interface/actions/workflows/build-rolling.yml)
+[![Humble](https://github.com/Duatic/soem_interface/raw/badges/humble.svg)](https://github.com/Duatic/soem_interface/actions/workflows/ci.yml)
+[![Jazzy](https://github.com/Duatic/soem_interface/raw/badges/jazzy.svg)](https://github.com/Duatic/soem_interface/actions/workflows/ci.yml)
+[![Kilted](https://github.com/Duatic/soem_interface/raw/badges/kilted.svg)](https://github.com/Duatic/soem_interface/actions/workflows/ci.yml)
+[![Lyrical](https://github.com/Duatic/soem_interface/raw/badges/lyrical.svg)](https://github.com/Duatic/soem_interface/actions/workflows/ci.yml)
+[![Rolling](https://github.com/Duatic/soem_interface/raw/badges/rolling.svg)](https://github.com/Duatic/soem_interface/actions/workflows/ci.yml)
 
 __NOTE:__ This is a fork of the original [package](https://github.com/leggedrobotics/soem_interface) maintained by [Duatic](https://duatic.com).
 
