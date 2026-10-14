@@ -48,7 +48,7 @@ namespace soem_interface_rsl {
 class EthercatSlaveBase;
 using EthercatSlaveBasePtr = std::shared_ptr<EthercatSlaveBase>;
 
-// Template Adatper for pImpl Design with Templates. https://en.cppreference.com/w/cpp/language/pimpl
+// Template Adapter for pImpl Design with Templates. https://en.cppreference.com/w/cpp/language/pimpl
 class SOEM_RSL_EXPORT EthercatBusBaseTemplateAdapter {
  private:
   struct EthercatSlaveBaseImpl;
@@ -68,7 +68,7 @@ class SOEM_RSL_EXPORT EthercatBusBaseTemplateAdapter {
 };
 
 /**
- * @brief      Class for managing an ethercat bus containing one or multpile
+ * @brief      Class for managing an ethercat bus containing one or multiple
  *             slaves
  */
 class SOEM_RSL_EXPORT EthercatBusBase : private EthercatBusBaseTemplateAdapter {
@@ -102,7 +102,7 @@ class SOEM_RSL_EXPORT EthercatBusBase : private EthercatBusBaseTemplateAdapter {
   static bool busIsAvailable(const std::string& name);
 
   /*!
-   * Print all available busses.
+   * Print all available buses.
    */
   static void printAvailableBusses();
 
@@ -129,7 +129,7 @@ class SOEM_RSL_EXPORT EthercatBusBase : private EthercatBusBaseTemplateAdapter {
    * Startup the bus communication.
    * @param abortFlag  during startup it is waited till all the slaves are ready this can take some time, the abortFlag can be set to abort
    * this operation.
-   * @param sizeCheck	perform a check of the Rx and Tx Pdo sizes defined in the PdoInfo oject of the slaves
+   * @param sizeCheck	perform a check of the Rx and Tx Pdo sizes defined in the PdoInfo object of the slaves
    * @param maxDiscoverRetries	number of retries till the configured number of slaves are found on the bus.
    * @return True if successful.
    */

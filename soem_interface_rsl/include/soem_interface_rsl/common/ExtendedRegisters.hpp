@@ -89,7 +89,7 @@ struct RegisterDefinition {
     throw std::runtime_error("Could not find Register by regAddrsEnum");
   };
 
-  // calcualtes the size required to read up to/including the given register.
+  // calculates the size required to read up to/including the given register.
   [[nodiscard]] constexpr uint16_t sizeUpToAddr(RegAddrEnum regAddrEnum) const {
     uint16_t size{0};
     for (const auto& reg : Registers) {
@@ -111,7 +111,7 @@ struct RegisterDefinition {
     ReturnType rawValue{};
     std::memcpy(&rawValue, (static_cast<char*>(rawData) + offset), sizeof(ReturnType));
 
-    //handle endianess. (default little endinaness)  ethos = ethercat-to-host-short
+    //handle endianness. (default little endinaness)  ethos = ethercat-to-host-short
 //    switch (regTypeEnumByAddr(regAddrEnum)) {
 //      case RegTypeEnum::Unsigned8:
 //        break;
@@ -125,7 +125,7 @@ struct RegisterDefinition {
 //        rawValue = etohll(rawValue);
 //        break;
 //      default:
-//        throw std::runtime_error("check endianess when converting larger memory blobs..");
+//        throw std::runtime_error("check endianness when converting larger memory blobs..");
 //    }
 
     return rawValue;

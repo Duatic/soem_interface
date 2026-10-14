@@ -78,7 +78,7 @@ enum class SOEM_RSL_EXPORT ETHERCAT_TYPE : uint16_t {
   ECT_BIT8 = 0x0037
 };
 
-// note this is a simplification - the ethercat specs have a more fine grained access control. (Ecat specificiation Part 6, page 61.)
+// note this is a simplification - the ethercat specs have a more fine grained access control. (Ecat specification Part 6, page 61.)
 namespace EcAccess {  // make sure that no name conflicts, but allowing implicit conversion.
 enum EcAccess : uint16_t {
   NOT_IMPL = 0b0000'0000'0000'0000,

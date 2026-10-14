@@ -32,7 +32,7 @@
 namespace soem_interface_rsl {
 
 /**
- * @brief      Class for managing multiple ethercat busses
+ * @brief      Class for managing multiple ethercat buses
  */
 class EthercatBusManagerBase {
  public:
@@ -62,31 +62,31 @@ class EthercatBusManagerBase {
   bool addEthercatBus(std::unique_ptr<soem_interface_rsl::EthercatBusBase> bus);
 
   /**
-   * @brief      Starts up all busses and puts them in operational mode
+   * @brief      Starts up all buses and puts them in operational mode
    *
    * @return     True if successful
    */
   bool startupAllBuses();
 
   /**
-   * @brief      Starts up all busses
+   * @brief      Starts up all buses
    *
    * @return     True if successful
    */
   bool startupCommunication();
 
   /**
-   * @brief      Sets all busses to safe operational state
+   * @brief      Sets all buses to safe operational state
    */
   void setBussesSafeOperational();
 
   /**
-   * @brief      Sets all busses to pre operational state
+   * @brief      Sets all buses to pre operational state
    */
   void setBussesPreOperational();
 
   /**
-   * @brief      Sets all busses to operational state
+   * @brief      Sets all buses to operational state
    */
   void setBussesOperational();
 
@@ -102,17 +102,17 @@ class EthercatBusManagerBase {
   void waitForState(const uint16_t state, const uint16_t slave = 0, const std::string busName = "", const unsigned int maxRetries = 40);
 
   /**
-   * @brief      Calls update read on all busses
+   * @brief      Calls update read on all buses
    */
   void readAllBuses();
 
   /**
-   * @brief      Calls update write on all busses
+   * @brief      Calls update write on all buses
    */
   void writeToAllBuses();
 
   /**
-   * @brief      Calls shutdown on all busses
+   * @brief      Calls shutdown on all buses
    */
   void shutdownAllBuses();
 

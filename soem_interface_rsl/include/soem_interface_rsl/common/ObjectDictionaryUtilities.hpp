@@ -34,7 +34,7 @@ namespace soem_interface_rsl {
 //  the definition of a Object Dictionary should be simpel, the best is a macro which generates nested structs / array's.
 //  each Object Entry (depending on the type, VARiable, ARRAY, RECORD) can also provide some special member functions
 //  then also PDO's (dynamic) can be hardcoded with a simpel Macro.
-//  addtionally, auto generation of PDO and ObjectDict Headers from Slave Info is possible.
+//  additionally, auto generation of PDO and ObjectDict Headers from Slave Info is possible.
 
 template <ETHERCAT_TYPE typeEnum>
 struct TypeFromECType {};
@@ -83,7 +83,7 @@ struct TypeFromECType<ETHERCAT_TYPE::ECT_UNSIGNED16> {
 
 template <>
 struct TypeFromECType<ETHERCAT_TYPE::ECT_UNSIGNED24> {
-  // whats this.?
+  // what's this.?
 };
 
 template <>

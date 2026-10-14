@@ -72,7 +72,7 @@ class SOEM_RSL_EXPORT EthercatSlaveBase {
   /**
    * @brief      Startup non-ethercat specific objects for the slave
    *
-   * @return     True if succesful
+   * @return     True if successful
    */
   virtual bool startup() = 0;
 
