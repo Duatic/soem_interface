@@ -137,14 +137,14 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
           break;
         }
         if (retry == maxDiscoverRetries) {
-          MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] EtherCAT discovery failed: found " << std::max(detectedDevices, 0)
+          MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] EtherCAT discovery failed: found " << detectedDevices
                                                     << " device(s), but the highest configured address is " << requiredDevices << ".");
           ecx_close(&ecatContext_);
           return false;
         }
         // Sleep and retry.
         soem_interface_rsl::threadSleep(ecatConfigRetrySleep_);
-        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Found " << std::max(detectedDevices, 0) << " of " << requiredDevices
+        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Found " << detectedDevices << " of " << requiredDevices
                                                  << " EtherCAT devices. Retrying (" << (retry + 1) << "/" << maxDiscoverRetries << ")...");
       }
 
@@ -152,7 +152,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
       int configuredDevices = ecx_config_init(&ecatContext_, FALSE);
       if (configuredDevices < requiredDevices) {
         ecx_close(&ecatContext_);
-        MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] EtherCAT configuration failed: found " << std::max(configuredDevices, 0)
+        MELO_ERROR_STREAM("[soem_interface_rsl::" << name_ << "] EtherCAT configuration failed: found " << configuredDevices
                                                   << " device(s), but the highest configured address is " << requiredDevices << ".");
 
         EthercatBusBase::printAvailableBusses();
