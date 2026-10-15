@@ -530,10 +530,10 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
                                                  << std::setw(8) << std::hex << ecatContext_.slavelist[slave].ALstatuscode << " "
                                                  << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
       } else {
-        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaves_[slave - 1]->getName() << " alStatusCode: 0x"
+        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaveNameAt(slave) << " alStatusCode: 0x"
                                                  << std::setfill('0') << std::setw(8) << std::hex
-                                                 << ecatContext_.slavelist[slave-1].ALstatuscode << " "
-                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave-1].ALstatuscode));
+                                                 << ecatContext_.slavelist[slave].ALstatuscode << " "
+                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
       }
       return false;
     }
@@ -559,10 +559,10 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
                                                  << std::setw(8) << std::hex << ecatContext_.slavelist[slave].ALstatuscode << " "
                                                  << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
       } else {
-        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaves_[slave - 1]->getName() << " alStatusCode: 0x"
+        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaveNameAt(slave) << " alStatusCode: 0x"
                                                  << std::setfill('0') << std::setw(8) << std::hex
-                                                 << ecatContext_.slavelist[slave-1].ALstatuscode << " "
-                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave-1].ALstatuscode));
+                                                 << ecatContext_.slavelist[slave].ALstatuscode << " "
+                                                 << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
       }
       return false;
     }
@@ -593,7 +593,7 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
                                                  << std::setw(8) << std::hex << ecatContext_.slavelist[slave].ALstatuscode << " "
                                                  << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
       } else {
-        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaves_[slave - 1]->getName() << " alStatusCode: 0x"
+        MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaveNameAt(slave) << " alStatusCode: 0x"
                                                  << std::setfill('0') << std::setw(8) << std::hex
                                                  << ecatContext_.slavelist[slave].ALstatuscode << " "
                                                  << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
@@ -697,12 +697,23 @@ struct EthercatBusBaseTemplateAdapter::EthercatSlaveBaseImpl {
                                                << std::setw(8) << std::hex << ecatContext_.slavelist[slave].ALstatuscode << " "
                                                << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
     } else {
-      MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaves_[slave - 1]->getName() << " alStatusCode: 0x"
+      MELO_INFO_STREAM("[soem_interface_rsl::" << name_ << "] Slave: " << slaveNameAt(slave) << " alStatusCode: 0x"
                                                << std::setfill('0') << std::setw(8) << std::hex
                                                << ecatContext_.slavelist[slave].ALstatuscode << " "
                                                << ec_ALstatuscode2string(ecatContext_.slavelist[slave].ALstatuscode));
     }
     return false;
+  }
+
+  // Name of the slave configured at a bus address. Addresses are not indices into slaves_, since
+  // devices without a configured slave (e.g. switch ports) take bus positions too.
+  std::string slaveNameAt(const uint16_t address) const {
+    for (const auto& slave : slaves_) {
+      if (slave->getAddress() == address) {
+        return slave->getName();
+      }
+    }
+    return "<no slave configured at address " + std::to_string(address) + ">";
   }
 
   std::string getErrorString(ec_errort error) {
