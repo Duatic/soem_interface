@@ -85,4 +85,7 @@ install(
     RUNTIME DESTINATION bin
 )
 
+# Binary packages carry the license text
+install(FILES LICENSE DESTINATION share/${PROJECT_NAME})
+
 ament_package()
