@@ -25,7 +25,7 @@ along with the soem_interface_rsl.  If not, see <https://www.gnu.org/licenses/>.
 
   <name>soem_interface_rsl</name>
   <version>0.4.0</version>
-  <description>C++ library to create multiple ethercat devices on one or multiple buses. Contains abstract base classes for the communication interface.</description>
+  <description>C++ library to create multiple EtherCAT devices on one or multiple buses. Contains abstract base classes for the communication interface.</description>
 
   <license>GPL-3.0-or-later</license>
 
