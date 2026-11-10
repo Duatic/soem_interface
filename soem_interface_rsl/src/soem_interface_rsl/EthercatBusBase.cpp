@@ -23,7 +23,7 @@
 #include <soem_interface_rsl/EthercatBusBase.hpp>
 #include <soem_interface_rsl/EthercatSlaveBase.hpp>
 
-#include <duatic_soem_vendor/ethercat.h>
+#include <soem_vendor/ethercat.h>
 #include <algorithm>
 // Forward declaration as newer versions of SOEM does not include it in the header anymore
 extern "C" int ecx_detect_slaves(ecx_contextt *context);

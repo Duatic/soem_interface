@@ -26,7 +26,7 @@ add_definitions(-DMELO_USE_COUT)
 
 
 find_package(ament_cmake REQUIRED)
-find_package(duatic_soem_vendor REQUIRED)
+find_package(soem_vendor REQUIRED)
 find_package(message_logger REQUIRED)
 
 
@@ -60,10 +60,10 @@ if(COMMAND ament_target_dependencies)
 else()
     target_link_libraries(${PROJECT_NAME} message_logger::message_logger)
 endif()
-target_link_libraries(${PROJECT_NAME} duatic_soem_vendor::duatic_soem_vendor)
+target_link_libraries(${PROJECT_NAME} soem_vendor::soem_vendor)
 
 ament_export_libraries(${PROJECT_NAME})
-ament_export_dependencies(duatic_soem_vendor message_logger)
+ament_export_dependencies(soem_vendor message_logger)
 ament_export_include_directories(include)
 ament_export_targets(export_${PROJECT_NAME})
 
