@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: write
       packages: write
-    uses: Duatic/duatic_ros2_docker_images/.github/workflows/reusable_release_image.yml@v1
+    uses: Duatic/duatic_ros2_docker_images/.github/workflows/reusable_release_image.yml@v2
     with:
       ros_distro: ${{ inputs.ros_distro }}
       version: ${{ inputs.version }}
